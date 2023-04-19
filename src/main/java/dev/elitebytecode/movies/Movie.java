@@ -21,13 +21,13 @@ import java.util.List;
 public class Movie {
 
     @Id // tells the object id to be treated as a unique identifier
-    private ObjectId id;
-    private String imbId;
+    private ObjectId _id;
+    private String imdbId;
     private String title;
     private String releaseDate;
     private String trailerLink;
-    private String poster;
     private List<String> genres;
+    private String poster;
     private List<String> backdrops;
 
     // Use the document-reference from mongodb to
@@ -35,4 +35,5 @@ public class Movie {
     // this creates a relationship between the movie object and review object
     @DocumentReference
     private List<Review> reviewsIds;
+
 }

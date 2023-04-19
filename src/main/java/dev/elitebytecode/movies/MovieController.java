@@ -8,10 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,20 +35,49 @@ public class MovieController {
     //    }
 
     //Step 3-3
-    // Return all movies
+    /**
+     * List all movies
+     * @return movie list
+     */
     public ResponseEntity<List<Movie>> getAllMovies(){
         return new ResponseEntity<>(movieService.allMovies(), HttpStatus.OK);
     }
 
     // find a single movie by its id
     // Convert the path object into and id.
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable ObjectId id){
-        return new ResponseEntity<Optional<Movie>>(movieService.singleMovie(id), HttpStatus.OK);
+    @GetMapping("/{imdbId}")
+    public ResponseEntity<Optional<Movie>> getMovieByImdbID(@PathVariable String imdbId){
+        return new ResponseEntity<Optional<Movie>>(movieService.singleMovieByImdbID(imdbId), HttpStatus.OK);
     }
 
-//    @GetMapping("/{title}")
-//    public ResponseEntity<Optional<Movie>> getSingleMovieByTitle(@PathVariable String title){
-//        return new ResponseEntity<Optional<Movie>>(movieService.singleMovieByTitle(title), HttpStatus.OK);
-//    }
+    /**
+     * Creates/Posts a new movie
+     * @param movie
+     * @return
+     */
+    @PostMapping("/add-movie")
+    public ResponseEntity<Movie> addNewMovie(@RequestBody Movie movie){
+        return new ResponseEntity<Movie>(movieService.addMovie(movie), HttpStatus.OK);
+
+    }
+
+    /**
+     * Updates a movie document
+     * @param movie
+     * @return movie document updated
+     */
+    @PutMapping("updateMovie/{imdbId}")
+    public ResponseEntity<Optional<Movie>> updateMovieByImdbId(@RequestBody Movie movie){
+        return new ResponseEntity<Optional<Movie>>(movieService.updateMovieImdbId(movie), HttpStatus.OK);
+    }
+
+    /**
+     * Deletes a movie from DB
+     * @param _id // movie object id
+     */
+    @DeleteMapping("deleteMovie/{_id}")
+    public void deleteMovieByImdbId(@PathVariable ObjectId _id){
+        movieService.deleteMovieByImdbId(_id);
+    }
+
 }

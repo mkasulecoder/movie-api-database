@@ -17,19 +17,35 @@ public class MovieService {
     @Autowired // auto instantiates
     private MovieRepository movieRepository;
 
-    //Return all movies
+    //Get or return all movies
     public List<Movie> allMovies(){
         return movieRepository.findAll();
     }
 
     //Return single movie by id
     // Use Optional to tell java to return null if id is not matching db
-    public Optional<Movie> singleMovie(ObjectId id){
-        return movieRepository.findById(id);
+    public Optional<Movie> singleMovieByImdbID(String imdbId){
+        return movieRepository.findMovieByImdbId(imdbId);
     }
 
-   //Return single movie by imdbId based on the custom method made in repo
+   // Return single movie by imdbId based on the custom method made in repo
     public Optional<Movie> singleMovieByTitle(String title){
         return movieRepository.findMovieByTitle(title);
     }
+
+    // Add new movie
+    public Movie addMovie(Movie movie){
+        return movieRepository.save(movie);
+    }
+
+    // Update movies with save repo method
+    public Optional<Movie> updateMovieImdbId(Movie movie){
+        return Optional.of(movieRepository.insert(movie));
+    }
+
+    // Delete movie by Id
+    public void deleteMovieByImdbId(Object id){
+        movieRepository.deleteById((ObjectId) id);
+    }
+
 }
