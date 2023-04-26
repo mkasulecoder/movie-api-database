@@ -15,7 +15,8 @@ import java.util.Optional;
 
 @RestController
 // will create and api route
-@RequestMapping("/api/vi/movies/")
+@RequestMapping("/api/v1/movies/")
+@CrossOrigin
 
 public class MovieController {
 
