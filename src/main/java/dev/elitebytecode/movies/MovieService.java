@@ -24,12 +24,12 @@ public class MovieService {
 
     //Return single movie by id
     // Use Optional to tell java to return null if id is not matching db
-    public Optional<Movie> singleMovieByImdbID(String imdbId){
-        return movieRepository.findMovieByImdbId(imdbId);
+    public Optional<Movie> findSingleMovieByID(Object id){
+        return movieRepository.findById((ObjectId) id);
     }
 
-   // Return single movie by imdbId based on the custom method made in repo
-    public Optional<Movie> singleMovieByTitle(String title){
+   // Return single movie by Title
+    public Optional<Movie> findSingleMovieByTitle(String title){
         return movieRepository.findMovieByTitle(title);
     }
 
@@ -39,12 +39,12 @@ public class MovieService {
     }
 
     // Update movies with save repo method
-    public Optional<Movie> updateMovieImdbId(Movie movie){
+    public Optional<Movie> updateSingleMovieById(ObjectId id, Movie movie){
         return Optional.of(movieRepository.insert(movie));
     }
 
     // Delete movie by Id
-    public void deleteMovieByImdbId(Object id){
+    public void deleteSingleMovieByImdbId(Object id){
         movieRepository.deleteById((ObjectId) id);
     }
 

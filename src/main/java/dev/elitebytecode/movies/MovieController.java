@@ -25,30 +25,22 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping
-    //Testing Purposes 1
-    //    public String allMovies(){
-    //        return "All Movies";
-    //    }
-    //Testing Purposes 2
-    //It's best to return a ResponseEntity<dataType>
-    //    public ResponseEntity<String> getAllMovies(){
-    //        return new ResponseEntity<String>("All movies", HttpStatus.OK);
-    //    }
-
-    //Step 3-3
-    /**
-     * List all movies
-     * @return movie list
-     */
     public ResponseEntity<List<Movie>> getAllMovies(){
         return new ResponseEntity<>(movieService.allMovies(), HttpStatus.OK);
     }
 
     // find a single movie by its id
     // Convert the path object into and id.
-    @GetMapping("/{imdbId}")
-    public ResponseEntity<Optional<Movie>> getMovieByImdbID(@PathVariable String imdbId){
-        return new ResponseEntity<Optional<Movie>>(movieService.singleMovieByImdbID(imdbId), HttpStatus.OK);
+    @GetMapping("find-movie/{_id}")
+    public ResponseEntity<Optional<Movie>> getMovieByID(@PathVariable ObjectId _id){
+        return new ResponseEntity<Optional<Movie>>(movieService.findSingleMovieByID(_id), HttpStatus.OK);
+    }
+
+    // find a single movie by its title
+    // Convert the path object into and id.
+    @GetMapping("/{title}")
+    public ResponseEntity<Optional<Movie>> getMovieByTitle(@PathVariable String title){
+        return new ResponseEntity<Optional<Movie>>(movieService.findSingleMovieByTitle(title), HttpStatus.OK);
     }
 
     /**
@@ -67,18 +59,18 @@ public class MovieController {
      * @param movie
      * @return movie document updated
      */
-    @PutMapping("updateMovie/{imdbId}")
-    public ResponseEntity<Optional<Movie>> updateMovieByImdbId(@RequestBody Movie movie){
-        return new ResponseEntity<Optional<Movie>>(movieService.updateMovieImdbId(movie), HttpStatus.OK);
+    @PutMapping("updateMovie/{_id}")
+    public ResponseEntity<Optional<Movie>> updateMovieById(@PathVariable ObjectId _id, @RequestBody Movie movie){
+        return new ResponseEntity<Optional<Movie>>(movieService.updateSingleMovieById(_id, movie), HttpStatus.OK);
     }
 
     /**
      * Deletes a movie from DB
      * @param _id // movie object id
      */
-    @DeleteMapping("deleteMovie/{_id}")
+    @DeleteMapping("delete-movie/{_id}")
     public void deleteMovieByImdbId(@PathVariable ObjectId _id){
-        movieService.deleteMovieByImdbId(_id);
+        movieService.deleteSingleMovieByImdbId(_id);
     }
 
 }

@@ -17,6 +17,6 @@ public interface MovieRepository extends MongoRepository<Movie, ObjectId>  {
     // This is a custom method we can use get movies by imdb and keep object ids private
     Optional<Movie> findMovieByTitle(String title);
 
-    Optional<Movie> findMovieByImdbId(String imdbId);
+//    Optional<Movie> singleMovieByImdbID(String id);
 
 }
