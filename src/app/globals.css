@@ -90,18 +90,17 @@ header {
   background-color: var(--primary-color);
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
-  font-weight: bold;
 }
 
-.movie-info span.green {
+.green {
   color: lightgreen;
 }
 
-.movie-info span.orange {
+.orange {
   color: orange;
 }
 
-.movie-info span.red {
+.red {
   color: red;
 }
 
@@ -120,4 +119,24 @@ header {
 
 .movie:hover .overview {
   transform: translateY(0);
+}
+
+.btn-warning:hover{
+  background-color: orange !important;
+}
+
+@media (max-width: 1000px) {
+  .movie-section{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .movie-section{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto;
+  }
 }
