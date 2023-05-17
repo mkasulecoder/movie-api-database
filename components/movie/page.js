@@ -10,7 +10,10 @@ function AllMovies() {
   useEffect(() => {
     fetch("http://localhost:8080/api/v1/movies/")
       .then((response) => response.json())
-      .then((result) => setMovies(result));
+      .then((result) => setMovies(result))
+      .catch((error) => {
+        console.error("Error in fetching all movies: ", error);
+      });
   }, []);
 
   const handleWatchNowClick = (movie) => {
@@ -28,7 +31,7 @@ function AllMovies() {
       {/* Movies */}
       <div className='container movie-section text-white w-100 my-3 w-100'>
         {movies.map((movie) => (
-          <div key={movie.id} className='movie m-2'>
+          <div key={movie._id} className='movie m-2'>
             <div>
               <img src={movie.poster} alt='`{movie.title}`  Image' />
             </div>
@@ -41,9 +44,9 @@ function AllMovies() {
                 <span className='green'>Released {movie.releaseDate}</span>
               </div>
             </div>
-            <div class='overview w-100'>
+            <div className='overview w-100'>
               <h4>{movie.title}</h4>
-              <div class='mb-2'>
+              <div className='mb-2'>
                 {movie.genres.map((genre) => (
                   <span key={genre.id} className='mr-3 green'>
                     {genre}
