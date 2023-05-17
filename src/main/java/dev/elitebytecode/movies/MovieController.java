@@ -38,7 +38,7 @@ public class MovieController {
 
     // find a single movie by its title
     // Convert the path object into and id.
-    @GetMapping("/{title}")
+    @GetMapping("find-movie-title/{title}")
     public ResponseEntity<Optional<Movie>> getMovieByTitle(@PathVariable String title){
         return new ResponseEntity<Optional<Movie>>(movieService.findSingleMovieByTitle(title), HttpStatus.OK);
     }
