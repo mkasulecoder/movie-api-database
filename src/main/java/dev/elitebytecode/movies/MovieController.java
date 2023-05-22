@@ -7,6 +7,7 @@ package dev.elitebytecode.movies;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<List<Movie>> getAllMovies(){
         return new ResponseEntity<>(movieService.allMovies(), HttpStatus.OK);
     }
@@ -50,7 +51,7 @@ public class MovieController {
      */
     @PostMapping("/add-movie")
     public ResponseEntity<Movie> addNewMovie(@RequestBody Movie movie){
-        return new ResponseEntity<Movie>(movieService.addMovie(movie), HttpStatus.OK);
+        return new ResponseEntity<Movie>(movieService.addMovie(movie), HttpStatus.CREATED);
 
     }
 
@@ -59,15 +60,17 @@ public class MovieController {
      * @param movie
      * @return movie document updated
      */
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("updateMovie/{_id}")
-    public ResponseEntity<Optional<Movie>> updateMovieById(@PathVariable ObjectId _id, @RequestBody Movie movie){
-        return new ResponseEntity<Optional<Movie>>(movieService.updateSingleMovieById(_id, movie), HttpStatus.OK);
+    public void updateMovieById(@PathVariable ObjectId _id, @RequestBody Movie movie){
+       movieService.updateSingleMovieById(_id, movie);
     }
 
     /**
      * Deletes a movie from DB
      * @param _id // movie object id
      */
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("delete-movie/{_id}")
     public void deleteMovieByImdbId(@PathVariable ObjectId _id){
         movieService.deleteSingleMovieByImdbId(_id);

@@ -1,0 +1,71 @@
+### Get movies from database
+GET http://localhost:8080/api/v1/movies/
+
+### Get single movie by id
+GET http://localhost:8080/api/v1/movies/find-movie/63c9df6d95ed606a48350ece
+
+### Get single movie by title
+GET http://localhost:8080/api/v1/movies/find-movie-title/Troll
+
+### Add New Moview
+POST http://localhost:8080/api/v1/movies/add-movie
+Content-Type: application/json
+
+{
+  "_id": {
+    "timestamp": 1674104317,
+    "date": "2023-01-20T00:25:17.000+00:00"
+  },
+  "imdbId": "tt8765718",
+  "title": "Code Stack Developer",
+  "releaseDate": "2023-01-06",
+  "trailerLink": "https://youtu.be/riZ2GAaMDGM",
+  "genres": [
+    "Science Fiction",
+    "Horror",
+    "Comedy"
+  ],
+  "poster": "https://image.tmdb.org/t/p/w500/xBl5AGw7HXZcv1nNXPlzGgO4Cfo.jpg",
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/5kAGbi9MFAobQTVfK4kWPnIfnP0.jpg",
+    "https://image.tmdb.org/t/p/original/dlxzUj7z1MqEcFiwvvrj0bvBKDY.jpg",
+    "https://image.tmdb.org/t/p/original/q2fY4kMXKoGv4CQf310MCxpXlRI.jpg",
+    "https://image.tmdb.org/t/p/original/pTxwFdsdDWzpCRYuk1QbggdaOlL.jpg",
+    "https://image.tmdb.org/t/p/original/1zuz2RgFoOjulkjjNHHFc3WiHGB.jpg",
+    "https://image.tmdb.org/t/p/original/7HqxI1IXMloT9VTSuDC8ikaj810.jpg",
+    "https://image.tmdb.org/t/p/original/vpK2rp3J5LiC01HoNM0j9DEHQ1T.jpg",
+    "https://image.tmdb.org/t/p/original/cNHXdmr4amP6EPCMa0dqD8rwzDV.jpg",
+    "https://image.tmdb.org/t/p/original/txQLFd6rfQrskQhFENkS1jElptt.jpg",
+    "https://image.tmdb.org/t/p/original/dC4tj1ONdlZ2TWv4XD2SA1KUnJN.jpg"
+  ],
+  "reviewsIds": []
+}
+
+### Update current Movie
+PUT http://localhost:8080/api/v1/updateMovie/63c9df6d95ed606a48350ece
+
+{
+  "_id": {
+    "timestamp": 1674104317,
+    "date": "2023-01-20T00:25:17.000+00:00"
+  },
+  "imdbId": "tt8765718",
+  "title": "The Hacker",
+  "releaseDate": "2022  -01-06",
+  "trailerLink": "https://youtu.be/6qpudAhYhpc",
+  "genres": [
+    "Science Fiction",
+    "Horror",
+    "Comedy"
+  ],
+  "poster": "https://image.tmdb.org/t/p/w500/xBl5AGw7HXZcv1nNXPlzGgO4Cfo.jpg",
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/5kAGbi9MFAobQTVfK4kWPnIfnP0.jpg",
+    "https://image.tmdb.org/t/p/original/dlxzUj7z1MqEcFiwvvrj0bvBKDY.jpg",
+    "https://image.tmdb.org/t/p/original/q2fY4kMXKoGv4CQf310MCxpXlRI.jpg"
+  ],
+  "reviewsIds": [
+    "This is a great movie",
+    "Would rewatch again"
+  ]
+}
